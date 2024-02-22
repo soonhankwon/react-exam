@@ -1,8 +1,63 @@
-import logo from "./logo.svg";
+import React, { Component } from "react";
 import "./App.css";
 
-function App() {
-  return <div></div>;
-}
+export default class App extends Component {
+  bthStyle = {
+    color: "#fff",
+    border: "none",
+    padding: "5px 9px",
+    borderRadius: "50%",
+    cursor: "pointer",
+    float: "right",
+  };
 
-export default App;
+  getStyle = () => {
+    return {
+      padding: "10px",
+      borderBottom: "1px #ccc dotted",
+      textDecoration: "none",
+    };
+  };
+
+  handleClick = (id) => {
+    let newTodoData = this.todoData.filter((data) => data.id !== id);
+    console.log(newTodoData);
+  };
+
+  todoData = [
+    {
+      id: "1",
+      title: "공부하기",
+      completed: true,
+    },
+    {
+      id: "2",
+      title: "청소하기",
+      completed: false,
+    },
+  ];
+
+  render() {
+    return (
+      <div className="container">
+        <div className="todoBlock">
+          <div className="title">
+            <h1>할 일 목록</h1>
+          </div>
+          {this.todoData.map((data) => (
+            <div style={this.getStyle()} key={data.id}>
+              <input type="checkbox" defaultChecked={false} />
+              {data.title}
+              <button
+                style={this.bthStyle}
+                onClick={() => this.handleClick(data.id)}
+              >
+                x
+              </button>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+}
