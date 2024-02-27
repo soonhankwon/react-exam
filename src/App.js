@@ -29,6 +29,7 @@ export default function App() {
         <div className="title">
           <h1>할 일 목록</h1>
         </div>
+        <h1 class="text-3xl font-bold underline">Hello world!</h1>
         <List todoData={todoData} setTodoData={setTodoData} />
 
         <Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
