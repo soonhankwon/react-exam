@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./App.css";
 import Lists from "./components/Lists";
 import Form from "./components/Form";
@@ -7,6 +7,14 @@ export default function App() {
   console.log("App Component");
   const [todoData, setTodoData] = useState([]);
   const [value, setValue] = useState("");
+
+  const handleClick = useCallback(
+    (id) => {
+      let newTodoData = todoData.filter((data) => data.id !== id);
+      setTodoData(newTodoData);
+    },
+    [todoData]
+  );
 
   const handleSubmit = (e) => {
     // form 안에 input을 전송할 때 페이지 리로드 되는 걸 막아줌
@@ -30,7 +38,11 @@ export default function App() {
         <div className="flex justify-between mb-3">
           <h1>할 일 목록</h1>
         </div>
-        <Lists todoData={todoData} setTodoData={setTodoData} />
+        <Lists
+          handleClick={handleClick}
+          todoData={todoData}
+          setTodoData={setTodoData}
+        />
 
         <Form handleSubmit={handleSubmit} value={value} setValue={setValue} />
       </div>
