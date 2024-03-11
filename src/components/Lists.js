@@ -14,6 +14,10 @@ const Lists = React.memo(({ todoData, setTodoData, handleClick }) => {
     // 원라는 자리에 reorderedItem을 insert해준다.
     newTodoData.splice(result.destination.index, 0, reorderedItem);
     setTodoData(newTodoData);
+    localStorage.setItem(
+      "todoData",
+      JSON.stringify([...todoData, newTodoData])
+    );
   };
   return (
     <div>
